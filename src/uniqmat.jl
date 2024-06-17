@@ -1,7 +1,7 @@
 module uniqmat
 
 export uniq
-export well_come
+export wellcome
 
 include("utils.jl")
 
