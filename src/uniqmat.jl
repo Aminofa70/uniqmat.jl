@@ -1,5 +1,7 @@
 module uniqmat
 
-# Write your package code here.
+export uniq
+
+include("utils.jl")
 
 end
