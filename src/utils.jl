@@ -1,5 +1,8 @@
 ### function uniq behaves like MATALAB unique function
 function uniq(A, cond::String="[]")
+    if isempty(A)
+        return []
+    end
     # Handling vectors
     if isa(A, Vector)
         if cond == "rows"
@@ -55,15 +58,6 @@ function uniq(A, cond::String="[]")
             ic = map(r -> findfirst(==(slA[r]), slC), axes(A, dims))
             return C, ia, ic       
         end     
-    end
-    
-    if isempty(A)
-        if cond == "rows"
-            C = []
-            ia = []
-            ic = []
-            return C, ia, ic
-        end
     end
     
 end # end function 

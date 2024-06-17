@@ -57,3 +57,9 @@ end
 @testset "test my code for sum" begin
     @test my_sum_upm(2.,3.) == 5
 end
+
+##################################################
+@testset "test uniq empty" begin
+    a = []
+    @test uniq(a) == []
+end
