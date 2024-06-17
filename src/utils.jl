@@ -126,3 +126,7 @@ julia> ic
 function wellcome()
     println("wellcome to the Julia realm; Amin") 
 end
+
+function my_sum_upm(x::Float64,y::Float64)
+      return x+y
+end 
