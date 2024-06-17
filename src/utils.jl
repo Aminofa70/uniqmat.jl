@@ -57,12 +57,13 @@ function uniq(A, cond::String="[]")
         end     
     end
     
-    if A == []
-       cond == "rows"
-       return [], [], []
-    elseif cond == "[]"
+    if isa(A, Matrix)
+       if cond == "rows"
         return [], [], []
-    end 
+       elseif cond == "[]"
+        return [], [], []
+       end 
+    end
 end # end function 
 
 """
