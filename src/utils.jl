@@ -57,19 +57,15 @@ function uniq(A, cond::String="[]")
         end     
     end
     
-    if isa(A, [])
-       if cond == "rows"
-        C = []
-        ia =[]
-        ic = []
-        return C, ia, ic 
-       elseif cond == "[]"
-        C = []
-        ia =[]
-        ic = []
-        return C, ia, ic 
-       end 
+    if isempty(A)
+        if cond == "rows"
+            C = []
+            ia = []
+            ic = []
+            return C, ia, ic
+        end
     end
+    
 end # end function 
 
 """
