@@ -123,3 +123,6 @@ julia> ic
 """
 
 
+function wellcome()
+    println("wellcome to the Julia realm; Amin") 
+end
