@@ -52,3 +52,8 @@ end
     @test ia == expected_ia
     @test ic == expected_ic
 end
+
+##################################################
+@testset "test my code for sum" begin
+    @test my_sum_upm(2.,3.) == 5
+end
