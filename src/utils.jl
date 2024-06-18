@@ -25,40 +25,31 @@ function uniq(A, cond::String="[]")
         end
     end
 
-    # Handling matrices
-    if isa(A, Matrix)
-        if cond == "rows"
-            dims = 1
-            @assert ndims(A) ∈ (1, 2) "The input array must be either 1D or 2D."
-    
-            # Generate a view for each row of the matrix A
-            slA = ndims(A) > 1 ? eachslice(A, dims=dims) : [A]
-    
-            # Unique indices based on row values
-            ia = unique(i -> vec(slA[i]), axes(A, dims))
-            sort!(ia, by=i -> vec(slA[i]))
-    
-            # Stack the unique rows to form a matrix
-            C = vcat([slA[i] for i in ia]...)
-    
-            # For mapping each original row to its corresponding unique row in C
-            slC = ndims(C) > 1 ? eachslice(C, dims=dims) : [C]
-            ic = map(r -> findfirst(==(vec(slA[r])), vec.(slC)), axes(A, dims))
-    
-            return vec(C), ia, ic
-        elseif cond == "[]"
-            dims = 1
-            A = vec(A)
-            @assert ndims(A) ∈ (1, 2) "The input array must be either 1D or 2D."
-            slA = ndims(A) > 1 ? eachslice(A, dims=dims) : A
-            ia = unique(i -> slA[i], axes(A, dims))
-            sort!(ia, by=i -> slA[i])
-            C = stack(slA[ia], dims=dims)
-            slC = ndims(C) > 1 ? eachslice(C, dims=dims) : C
-            ic = map(r -> findfirst(==(slA[r]), slC), axes(A, dims))
-            return C, ia, ic       
-        end     
+   # Handling matrices
+   if isa(A, Matrix)
+    if cond == "rows"
+        dims = 1
+        @assert ndims(A) ∈ (1, 2) "The input array must be either 1D or 2D."
+        slA = ndims(A) > 1 ? eachslice(A, dims=dims) : A
+        ia = unique(i -> slA[i], axes(A, dims))
+        sort!(ia, by=i -> slA[i])
+        C = stack(slA[ia], dims=dims)
+        slC = ndims(C) > 1 ? eachslice(C, dims=dims) : C
+        ic = map(r -> findfirst(==(slA[r]), slC), axes(A, dims))
+        return C, ia, ic
+    elseif cond == "[]"
+        dims = 1
+        A = vec(A)
+        @assert ndims(A) ∈ (1, 2) "The input array must be either 1D or 2D."
+        slA = ndims(A) > 1 ? eachslice(A, dims=dims) : A
+        ia = unique(i -> slA[i], axes(A, dims))
+        sort!(ia, by=i -> slA[i])
+        C = stack(slA[ia], dims=dims)
+        slC = ndims(C) > 1 ? eachslice(C, dims=dims) : C
+        ic = map(r -> findfirst(==(slA[r]), slC), axes(A, dims))
+        return C, ia, ic
     end
+end
     
 end # end function 
 
