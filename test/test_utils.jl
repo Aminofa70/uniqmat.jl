@@ -28,11 +28,11 @@ end
 ##################################################
 ##################################################
 @testset "for matrix without 'rows' option" begin
-    A = [9 2 5; 9 2 5]
+    A = [2 3 5; 6 9 10; 5 9 10]
     C, ia, ic = uniq(A)  
-    expected_C = [2,5,9]
-    expected_ia = [3,5,1]
-    expected_ic = [3,3,1,1,2,2]
+    expected_C = [2,3,5,6,9,10]
+    expected_ia = [1,4,3,2,5,8]
+    expected_ic = [1,4,3,2,5,5,3,6,6]
     
     @test C == expected_C
     @test ia == expected_ia
@@ -41,17 +41,18 @@ end
 
 ##################################################
 ##################################################
-@testset "for matrix with 'rows' option" begin
-    A = [9 2 5; 9 2 5]
-    C, ia, ic = uniq(A,"rows")  
-    expected_C = [9,2,5]
-    expected_ia = [1]
-    expected_ic = [1,1]
+@testset "matrix with 'rows' option" begin
+    A = [2 3 5; 6 9 10; 2 3 5]
+    C, ia, ic = unique(A, "rows")
+    expected_C = [2 3 5; 6 9 10]
+    expected_ia = [1, 2]
+    expected_ic = [1, 2, 1]
     
     @test C == expected_C
     @test ia == expected_ia
     @test ic == expected_ic
 end
+
 
 ##################################################
 @testset "test my code for sum" begin
