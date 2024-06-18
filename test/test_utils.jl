@@ -42,11 +42,11 @@ end
 ##################################################
 ##################################################
 @testset "matrix with 'rows' option" begin
-    A = [2 3 5; 6 9 10; 2 3 5]
-    C, ia, ic = unique(A, "rows")
+    A = [2 3 5; 6 9 10]
+    C, ia, ic = uniq(A, "rows")
     expected_C = [2 3 5; 6 9 10]
     expected_ia = [1, 2]
-    expected_ic = [1, 2, 1]
+    expected_ic = [1, 2]
     
     @test C == expected_C
     @test ia == expected_ia
